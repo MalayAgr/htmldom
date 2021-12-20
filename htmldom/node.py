@@ -22,8 +22,8 @@ def children_required(method):
 
 def child_existence_required(method):
     @functools.wraps(method)
-    def wrapper(self: Node, child: Node, *args, **kwargs):
-        if self.has_as_child(child.name):
+    def wrapper(self: Node, child: Node | str, *args, **kwargs):
+        if self.has_as_child(child):
             return method(self, child, *args, **kwargs)
 
         msg = f"The node {child.name!r} is not a child of the parent node {self.name!r}"
